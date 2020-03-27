@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface ApiREST {
@@ -17,13 +18,8 @@ public interface ApiREST {
             "Content-Type: application/json",
             "Accept: application/json"
     })
-    @GET("search/repositories?q=language:Java&sort=stars&page={page}/")
-    Call<List<Response>> listaResposta(@Path("page") int page);
-
-
-
-
-
+    @GET("search/repositories?q=language:Java&sort=stars")
+    Call<Response> resposta(@Query("page") int page);
 
 
 
