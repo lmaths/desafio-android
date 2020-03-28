@@ -1,6 +1,7 @@
 package com.rightside.tembicimatheuslima.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.rightside.tembicimatheuslima.PullRequestActivity;
 import com.rightside.tembicimatheuslima.R;
+import com.rightside.tembicimatheuslima.model.Owner;
 import com.rightside.tembicimatheuslima.model.Repository;
 import com.rightside.tembicimatheuslima.util.Utility;
 
@@ -36,16 +39,20 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull RepositoryViewHolder holder, int position) {
         Repository repository = repositories.get(position);
+        Owner owner = repository.getCreator();
         holder.textViewRepositoryName.setText(repository.getName());
         holder.textViewRepositoryStars.setText(String.valueOf(repository.getStars()));
         holder.textViewRepositoryForks.setText(String.valueOf(repository.getForks()));
         holder.textViewRepositoryDescription.setText(repository.getDescription());
-        holder.textViewRepositoryOwnerNickname.setText(repository.getCreator().getName());
+        holder.textViewRepositoryOwnerNickname.setText(owner.getName());
         holder.textViewRepositoryDescription.setMaxLines(2);
-        Utility.showCircleImage(context, holder.imageViewPictureRepositoryOwner, repository.getCreator().getProfilePictureUrl());
+        Utility.showCircleImage(context, holder.imageViewPictureRepositoryOwner, owner.getProfilePictureUrl());
 
         holder.itemView.setOnClickListener(view -> {
-            
+            Intent intent = new Intent(context, PullRequestActivity.class);
+            intent.putExtra("repositoryName", repository.getName());
+            intent.putExtra("ownerName", owner.getName());
+            context.startActivity(intent);
         });
 
     }

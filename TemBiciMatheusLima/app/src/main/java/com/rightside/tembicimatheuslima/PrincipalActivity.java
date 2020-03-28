@@ -84,7 +84,7 @@ public class PrincipalActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                viewModelRepositorys.getResposta(page).observe(PrincipalActivity.this, response -> {
+                viewModelRepositorys.getResponse(page).observe(PrincipalActivity.this, response -> {
                     for (Repository repository : response.getItens()) {
                         repositorios.add(repository);
                     }
