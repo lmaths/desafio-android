@@ -3,6 +3,7 @@ package com.rightside.tembicimatheuslima;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
@@ -28,17 +29,18 @@ public class PrincipalActivity extends AppCompatActivity {
     private int currentItens, totalItens, scrollOutItens;
     private static int firstItemVisible;
     private ProgressBar progressBarLoading;
-    private int pagina = 0 ;
+    private int pagina = 1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         recyclerView = findViewById(R.id.recyclerview_repositorios);
-        repositoryAdapter = new RepositoryAdapter();
+        repositoryAdapter = new RepositoryAdapter(PrincipalActivity.this);
         viewModelRepositorys = ViewModelProviders.of(this).get(ViewModelRepositorys.class);
         linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(repositoryAdapter);
         progressBarLoading = findViewById(R.id.progressBar_loading_repositories);
         firstItemVisible = linearLayoutManager.findFirstVisibleItemPosition();
@@ -66,7 +68,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
                 if(scrolando && ( currentItens + scrollOutItens == totalItens)) {
                     scrolando = false;
-                    fetchData(pagina = pagina +1);
+                    fetchData(pagina);
                 }
             }
         });
@@ -76,19 +78,21 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    private void fetchData(int pagina) {
+    private void fetchData(int page) {
         progressBarLoading.setVisibility(View.VISIBLE);
         recyclerView.setNestedScrollingEnabled(false);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                viewModelRepositorys.getResposta(pagina).observe(PrincipalActivity.this, response -> {
+                viewModelRepositorys.getResposta(page).observe(PrincipalActivity.this, response -> {
                     for (Repository repository : response.getItens()) {
                         repositorios.add(repository);
                     }
                     repositoryAdapter.updateRepository(repositorios);
                     progressBarLoading.setVisibility(View.GONE);
                 });
+
+               pagina = pagina + 1;
 
             }
         }, 5000);

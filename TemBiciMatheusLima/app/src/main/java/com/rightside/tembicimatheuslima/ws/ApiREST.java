@@ -1,4 +1,5 @@
 package com.rightside.tembicimatheuslima.ws;
+import com.rightside.tembicimatheuslima.model.Pull;
 import com.rightside.tembicimatheuslima.model.Response;
 
 import java.util.List;
@@ -20,6 +21,10 @@ public interface ApiREST {
     })
     @GET("search/repositories?q=language:Java&sort=stars")
     Call<Response> response(@Query("page") int page);
+
+    @Headers("repos/{owner}/{reponame}/pulls")
+    Call<List<Pull>> pull(@Path("owner") String ownerName, @Path("reponame") String repoName);
+
 
 
 
