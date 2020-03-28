@@ -2,7 +2,7 @@ package com.rightside.tembicimatheuslima.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class User {
+public class User {
     @SerializedName("login")
     private String name;
     @SerializedName("avatar_url")

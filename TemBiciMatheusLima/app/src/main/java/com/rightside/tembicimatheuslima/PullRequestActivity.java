@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.rightside.tembicimatheuslima.adapter.PullRequestAdapter;
 import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
@@ -23,7 +24,7 @@ public class PullRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pull_request);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.maintoolbar);
         RecyclerView recyclerView = findViewById(R.id.recyclerview_pull_requests);
         pullRequestAdapter = new PullRequestAdapter(this);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -38,7 +39,7 @@ public class PullRequestActivity extends AppCompatActivity {
         Log.d("pull", ownerName + " " + repoName);
 
         viewModelRepositorysPullRequests.getPullRequests(ownerName, repoName).observe(this, pulls -> {
-            pullRequestAdapter.updatePullRequests(pulls);
+                pullRequestAdapter.updatePullRequests(pulls);
         });
 
 

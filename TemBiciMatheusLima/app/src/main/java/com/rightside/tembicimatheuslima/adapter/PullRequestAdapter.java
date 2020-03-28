@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.tembicimatheuslima.R;
 import com.rightside.tembicimatheuslima.model.Pull;
+import com.rightside.tembicimatheuslima.model.User;
+import com.rightside.tembicimatheuslima.util.Utility;
 
 import org.w3c.dom.Text;
 
@@ -35,9 +38,14 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.textViewPullRequestName.setText(pullRequests.get(position).getName());
+        Pull pull = pullRequests.get(position);
+        holder.textViewPullRequestName.setText(pull.getName());
         Log.d("pull", pullRequests.get(position).getName());
-        holder.textViewPullRequestBody.setText(pullRequests.get(position).getBody());
+        holder.textViewPullRequestBody.setText(pull.getBody());
+        holder.textViewPullRequestBody.setMaxLines(2);
+        holder.textViewPullRequestDate.setText(Utility.formatDate(pull.getDate()));
+        holder.textViewPullRequestUserName.setText(pull.getUser().getName());
+        Utility.showCircleImage(context, holder.imageViewPullRequestUserProfilePicture, pull.getUser().getProfilePictureUrl());
     }
 
     @Override
@@ -54,11 +62,15 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewPullRequestName, textViewPullRequestBody;
+        private TextView textViewPullRequestName, textViewPullRequestBody, textViewPullRequestDate, textViewPullRequestUserName;
+        private ImageView imageViewPullRequestUserProfilePicture;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewPullRequestBody = itemView.findViewById(R.id.textView_pull_request_body);
+            textViewPullRequestDate = itemView.findViewById(R.id.textView_pull_request_date);
             textViewPullRequestName = itemView.findViewById(R.id.textView_pull_request_name);
+            textViewPullRequestUserName = itemView.findViewById(R.id.textView_pull_request_user_name);
+            imageViewPullRequestUserProfilePicture = itemView.findViewById(R.id.imageView_picture_pull_request_user);
         }
     }
 
