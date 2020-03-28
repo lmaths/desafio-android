@@ -39,9 +39,15 @@ public class PullRequestActivity extends AppCompatActivity {
         Log.d("pull", ownerName + " " + repoName);
 
         viewModelRepositorysPullRequests.getPullRequests(ownerName, repoName).observe(this, pulls -> {
-                pullRequestAdapter.updatePullRequests(pulls);
+         if(pulls.isEmpty()) {
+             Toast.makeText(this, "Não possui pull request", Toast.LENGTH_SHORT).show();
+         } else {
+             pullRequestAdapter.updatePullRequests(pulls);
+         }
+
         });
 
 
     }
+
 }
