@@ -7,10 +7,7 @@
     android:orientation="vertical"
     tools:context=".PrincipalActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_repositorios"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include layout="@layout/toolbar"/>
 
     <ProgressBar
         android:id="@+id/progressBar_loading_repositories"
