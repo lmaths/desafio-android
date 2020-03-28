@@ -1,6 +1,5 @@
 package com.rightside.tembicimatheuslima.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.tembicimatheuslima.R;
 import com.rightside.tembicimatheuslima.model.Repository;
-import com.rightside.tembicimatheuslima.model.Response;
 
 import java.util.List;
 
@@ -26,13 +24,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     @Override
     public RepositoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_repository, parent, false);
-
         return new RepositoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RepositoryViewHolder holder, int position) {
-        holder.textViewRepositorioNome.setText(repositorios.get(position).getNome());
+        holder.textViewRepositorioNome.setText(repositorios.get(position).getName());
     }
 
     @Override

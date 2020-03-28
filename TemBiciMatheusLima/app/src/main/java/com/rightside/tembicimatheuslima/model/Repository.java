@@ -6,17 +6,17 @@ public class Repository {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
-    private String nome;
+    private String name;
     @SerializedName("full_name")
-    private String nomeCompleto;
+    private String fullName;
     @SerializedName("description")
-    private String descricao;
+    private String description;
     @SerializedName("forks")
-    private int bifurcacoes;
+    private int forks;
     @SerializedName("stargazers_count")
-    private int estrelas;
+    private int stars;
     @SerializedName("owner")
-    private Owner criador;
+    private Owner creator;
 
     public int getId() {
         return id;
@@ -26,52 +26,52 @@ public class Repository {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getBifurcacoes() {
-        return bifurcacoes;
+    public int getForks() {
+        return forks;
     }
 
-    public void setBifurcacoes(int bifurcacoes) {
-        this.bifurcacoes = bifurcacoes;
+    public void setForks(int forks) {
+        this.forks = forks;
     }
 
-    public int getEstrelas() {
-        return estrelas;
+    public int getStars() {
+        return stars;
     }
 
-    public void setEstrelas(int estrelas) {
-        this.estrelas = estrelas;
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 
-    public Owner getCriador() {
-        return criador;
+    public Owner getCreator() {
+        return creator;
     }
 
-    public void setCriador(Owner criador) {
-        this.criador = criador;
+    public void setCreator(Owner creator) {
+        this.creator = creator;
     }
 
 }

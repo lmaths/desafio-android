@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class Owner {
     @SerializedName("login")
-    private String nome;
+    private String name;
     @SerializedName("avatar_url")
-    private String linkFoto;
+    private String profilePictureUrl;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLinkFoto() {
-        return linkFoto;
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
     }
 
-    public void setLinkFoto(String linkFoto) {
-        this.linkFoto = linkFoto;
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 }

@@ -7,26 +7,26 @@ import java.util.List;
 public class Response {
 
     @SerializedName("total_count")
-    private int contagemTotal;
+    private int totalCount;
     @SerializedName("incomplete_results")
-    private boolean resultadosIncompletos;
+    private boolean incompletedResults;
     @SerializedName("items")
     private List<Repository> itens;
 
-    public int getContagemTotal() {
-        return contagemTotal;
+    public int getTotalCount() {
+        return totalCount;
     }
 
-    public void setContagemTotal(int contagemTotal) {
-        this.contagemTotal = contagemTotal;
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 
-    public boolean isResultadosIncompletos() {
-        return resultadosIncompletos;
+    public boolean isIncompletedResults() {
+        return incompletedResults;
     }
 
-    public void setResultadosIncompletos(boolean resultadosIncompletos) {
-        this.resultadosIncompletos = resultadosIncompletos;
+    public void setIncompletedResults(boolean incompletedResults) {
+        this.incompletedResults = incompletedResults;
     }
 
     public List<Repository> getItens() {

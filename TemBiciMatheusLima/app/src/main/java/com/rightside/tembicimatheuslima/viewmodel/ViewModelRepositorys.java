@@ -18,6 +18,8 @@ public class ViewModelRepositorys extends AndroidViewModel {
     }
 
     public MutableLiveData<Response> getResposta(int pagina) {
-        return setupREST.getResposta(pagina);
+        return setupREST.getResponse(pagina);
     }
+
+
 }

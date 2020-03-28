@@ -19,7 +19,7 @@ public interface ApiREST {
             "Accept: application/json"
     })
     @GET("search/repositories?q=language:Java&sort=stars")
-    Call<Response> resposta(@Query("page") int page);
+    Call<Response> response(@Query("page") int page);
 
 
 

@@ -36,8 +36,8 @@ public class SetupREST {
     }
 
 
-    public MutableLiveData<Response> getResposta(int pagina) {
-        SetupREST.apiREST.resposta(1).enqueue(new Callback<Response>() {
+    public MutableLiveData<Response> getResponse(int page) {
+        SetupREST.apiREST.response(page).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 mutableLiveDataResponse.setValue(response.body());

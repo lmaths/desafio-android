@@ -1,40 +1,99 @@
 package com.rightside.tembicimatheuslima;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ProgressBar;
 
 import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
 import com.rightside.tembicimatheuslima.model.Repository;
 import com.rightside.tembicimatheuslima.viewmodel.ViewModelRepositorys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
     private ViewModelRepositorys viewModelRepositorys;
     private RepositoryAdapter repositoryAdapter;
-    private List<Repository> repositorios;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private Boolean scrolando = false;
+    private List<Repository> repositorios = new ArrayList<>();
+    private int currentItens, totalItens, scrollOutItens;
+    private static int firstItemVisible;
+    private ProgressBar progressBarLoading;
+    private int pagina = 0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_repositorios);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView = findViewById(R.id.recyclerview_repositorios);
         repositoryAdapter = new RepositoryAdapter();
-        recyclerView.setAdapter(repositoryAdapter);
-
         viewModelRepositorys = ViewModelProviders.of(this).get(ViewModelRepositorys.class);
-        viewModelRepositorys.getResposta(1).observe(this, response ->{
-            repositorios = response.getItens();
-            repositoryAdapter.updateRepository(repositorios);
+        linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(repositoryAdapter);
+        progressBarLoading = findViewById(R.id.progressBar_loading_repositories);
+        firstItemVisible = linearLayoutManager.findFirstVisibleItemPosition();
+
+        if(recyclerView.getAdapter().getItemCount() == 0 ){
+            fetchData(pagina);
+        }
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    scrolando = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItens = linearLayoutManager.getChildCount();
+                totalItens = linearLayoutManager.getItemCount();
+                scrollOutItens = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if(scrolando && ( currentItens + scrollOutItens == totalItens)) {
+                    scrolando = false;
+                    fetchData(pagina = pagina +1);
+                }
+            }
         });
 
 
+
+
     }
+
+    private void fetchData(int pagina) {
+        progressBarLoading.setVisibility(View.VISIBLE);
+        recyclerView.setNestedScrollingEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                viewModelRepositorys.getResposta(pagina).observe(PrincipalActivity.this, response -> {
+                    for (Repository repository : response.getItens()) {
+                        repositorios.add(repository);
+                    }
+                    repositoryAdapter.updateRepository(repositorios);
+                    progressBarLoading.setVisibility(View.GONE);
+                });
+
+            }
+        }, 5000);
+
+    }
+
+
 }
