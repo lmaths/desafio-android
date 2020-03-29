@@ -12,6 +12,10 @@ public class Pull {
     private Date date;
     @SerializedName("body")
     private String body;
+
+    @SerializedName("repos_url")
+    private String repositoryUrl;
+
     @SerializedName("user")
     private User user;
 
@@ -46,5 +50,14 @@ public class Pull {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public String getRepositoryUrl() {
+        return repositoryUrl;
+    }
+
+    public void setRepositoryUrl(String repositoryUrl) {
+        this.repositoryUrl = repositoryUrl;
     }
 }

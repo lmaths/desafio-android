@@ -1,6 +1,8 @@
 package com.rightside.tembicimatheuslima.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,13 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
         holder.textViewPullRequestDate.setText(Utility.formatDate(pull.getDate()));
         holder.textViewPullRequestUserName.setText(pull.getUser().getName());
         Utility.showCircleImage(context, holder.imageViewPullRequestUserProfilePicture, pull.getUser().getProfilePictureUrl());
+
+        holder.itemView.setOnClickListener(view -> {
+            String url = "http://www.example.com";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            context.startActivity(i);
+        });
     }
 
     @Override
