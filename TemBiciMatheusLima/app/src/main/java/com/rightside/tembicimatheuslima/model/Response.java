@@ -2,9 +2,10 @@ package com.rightside.tembicimatheuslima.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Response {
+public class Response implements Serializable {
 
     @SerializedName("total_count")
     private int totalCount;

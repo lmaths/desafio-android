@@ -1,6 +1,7 @@
 package com.rightside.tembicimatheuslima;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +21,7 @@ import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
 import com.rightside.tembicimatheuslima.model.Repository;
 import com.rightside.tembicimatheuslima.viewmodel.ViewModelRepositorys;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private Boolean scrolando = false;
-    private List<Repository> repositorios = new ArrayList<>();
+    private List<Repository> repositorios;
     private int currentItens, totalItens, scrollOutItens;
     private static int firstItemVisible;
     private ProgressBar progressBarLoading;
@@ -53,6 +55,13 @@ public class PrincipalActivity extends AppCompatActivity {
         toolbar.setTitle("Repositórios:");
         toolbar.setTitleTextColor(Color.WHITE);
         searchViewFindRepository.setQueryHint("Buscar Repositório: ");
+
+        if(savedInstanceState != null) {
+            repositorios = (List<Repository>) savedInstanceState.getSerializable("repositorios");
+        } else {
+            repositorios = new ArrayList<>();
+        }
+
         searchViewFindRepository.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -97,6 +106,13 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("repositorios", (Serializable) repositorios);
     }
 
     private void fetchData(int page) {

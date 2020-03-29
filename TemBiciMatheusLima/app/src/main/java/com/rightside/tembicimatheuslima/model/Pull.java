@@ -2,9 +2,10 @@ package com.rightside.tembicimatheuslima.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pull {
+public class Pull implements Serializable {
 
     @SerializedName("title")
     private String name;

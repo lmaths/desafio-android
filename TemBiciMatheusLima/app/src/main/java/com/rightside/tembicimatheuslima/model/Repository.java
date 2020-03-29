@@ -2,7 +2,9 @@ package com.rightside.tembicimatheuslima.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Repository {
+import java.io.Serializable;
+
+public class Repository implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
