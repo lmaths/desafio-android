@@ -74,4 +74,9 @@ public class Repository {
         this.creator = creator;
     }
 
+
+    public boolean contain(String text) {
+        return getName().toLowerCase().contains(text.toLowerCase());
+    }
+
 }

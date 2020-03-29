@@ -1,5 +1,9 @@
 package com.rightside.tembicimatheuslima.ws;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.rightside.tembicimatheuslima.model.Owner;
@@ -70,4 +74,5 @@ public class SetupREST {
         });
         return mutableLiveDataPullRequest;
     }
+    
 }
