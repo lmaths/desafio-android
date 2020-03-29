@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 
 import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
 import com.rightside.tembicimatheuslima.model.Repository;
+import com.rightside.tembicimatheuslima.util.ConstantUtils;
 import com.rightside.tembicimatheuslima.viewmodel.ViewModelRepositorys;
 
 import java.io.Serializable;
@@ -54,12 +55,12 @@ public class PrincipalActivity extends AppCompatActivity {
         recyclerView.setAdapter(repositoryAdapter);
         progressBarLoading = findViewById(R.id.progressBar_loading_repositories);
         firstItemVisible = linearLayoutManager.findFirstVisibleItemPosition();
-        toolbar.setTitle("Repositórios:");
+        toolbar.setTitle(ConstantUtils.REPOSITÓRIOS);
         toolbar.setTitleTextColor(Color.WHITE);
-        searchViewFindRepository.setQueryHint("Buscar Repositório: ");
+        searchViewFindRepository.setQueryHint(ConstantUtils.BUSCAR_REPOSITÓRIO);
 
         if(savedInstanceState != null) {
-            repositorios = (List<Repository>) savedInstanceState.getSerializable("repositorios");
+            repositorios = (List<Repository>) savedInstanceState.getSerializable(ConstantUtils.REPOSITORIOS);
         } else {
             repositorios = new ArrayList<>();
 
@@ -113,7 +114,7 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("repositorios", (Serializable) repositorios);
+        outState.putSerializable(ConstantUtils.REPOSITORIOS, (Serializable) repositorios);
     }
 
     private void fetchData(int page) {

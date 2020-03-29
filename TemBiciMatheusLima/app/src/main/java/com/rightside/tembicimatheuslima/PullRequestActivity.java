@@ -18,6 +18,7 @@ import com.rightside.tembicimatheuslima.adapter.PullRequestAdapter;
 import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
 import com.rightside.tembicimatheuslima.model.Pull;
 import com.rightside.tembicimatheuslima.model.Repository;
+import com.rightside.tembicimatheuslima.util.ConstantUtils;
 import com.rightside.tembicimatheuslima.util.Utility;
 import com.rightside.tembicimatheuslima.viewmodel.ViewModelRepositorys;
 
@@ -39,15 +40,15 @@ public class PullRequestActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(pullRequestAdapter);
-        searchViewFindPullRequest.setQueryHint("Buscar Pull Request");
+        searchViewFindPullRequest.setQueryHint(ConstantUtils.BUSCAR_PULL_REQUEST);
         viewModelRepositorysPullRequests = ViewModelProviders.of(this).get(ViewModelRepositorys.class);
         Intent intent = getIntent();
-        String ownerName = intent.getStringExtra("ownerName");
-        String repoName = intent.getStringExtra("repositoryName");
+        String ownerName = intent.getStringExtra(ConstantUtils.OWNER_NAME);
+        String repoName = intent.getStringExtra(ConstantUtils.REPOSITORY_NAME);
 
         viewModelRepositorysPullRequests.getPullRequests(ownerName, repoName).observe(this, pulls -> {
             if(pulls.isEmpty()) {
-                Utility.showAlert("Ops", "Esse repositório não possui pull request em aberto" , PullRequestActivity.this, PullRequestActivity.this);
+                Utility.showAlert(ConstantUtils.OPS, ConstantUtils.ESSE_REPOSITÓRIO_NÃO_POSSUI_PULL_REQUEST_EM_ABERTO, PullRequestActivity.this, PullRequestActivity.this);
             } else  {
                 this.pullRequests = pulls;
                 pullRequestAdapter.updatePullRequests(pulls);
