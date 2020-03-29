@@ -13,7 +13,7 @@ public class Pull {
     @SerializedName("body")
     private String body;
 
-    @SerializedName("repos_url")
+    @SerializedName("html_url")
     private String repositoryUrl;
 
     @SerializedName("user")

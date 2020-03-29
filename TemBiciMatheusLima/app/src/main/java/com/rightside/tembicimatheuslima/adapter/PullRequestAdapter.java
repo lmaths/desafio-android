@@ -43,6 +43,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
         Pull pull = pullRequests.get(position);
         holder.textViewPullRequestName.setText(pull.getName());
         Log.d("pull", pullRequests.get(position).getName());
+        Log.d("link", pullRequests.get(position).getRepositoryUrl());
         holder.textViewPullRequestBody.setText(pull.getBody());
         holder.textViewPullRequestBody.setMaxLines(2);
         holder.textViewPullRequestDate.setText(Utility.formatDate(pull.getDate()));
@@ -50,7 +51,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
         Utility.showCircleImage(context, holder.imageViewPullRequestUserProfilePicture, pull.getUser().getProfilePictureUrl());
 
         holder.itemView.setOnClickListener(view -> {
-            String url = "http://www.example.com";
+            String url = pull.getRepositoryUrl();
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             context.startActivity(i);
