@@ -36,6 +36,9 @@ public class PullRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pull_request);
         RecyclerView recyclerView = findViewById(R.id.recyclerview_pull_requests);
         SearchView searchViewFindPullRequest = findViewById(R.id.searchView_find_pull_request);
+        Toolbar toolbar = findViewById(R.id.toolbar_principal);
+        toolbar.setTitle("Pull Requests:");
+        toolbar.setTitleTextColor(Color.WHITE);
         pullRequestAdapter = new PullRequestAdapter(this);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));

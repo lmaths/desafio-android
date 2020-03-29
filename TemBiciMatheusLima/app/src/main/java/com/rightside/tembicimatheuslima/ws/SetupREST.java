@@ -10,8 +10,10 @@ import com.rightside.tembicimatheuslima.model.Owner;
 import com.rightside.tembicimatheuslima.model.Pull;
 import com.rightside.tembicimatheuslima.model.Response;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
