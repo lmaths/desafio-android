@@ -1,5 +1,6 @@
 package com.rightside.tembicimatheuslima.util;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -17,5 +18,10 @@ public class Utility {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String data = format.format(date);
         return data;
+    }
+
+    public static void showAlert(String tittle, String message, Context context) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle(tittle).setMessage(message).setNeutralButton("Ok", (dialog, which) -> dialog.cancel()).show();
     }
 }

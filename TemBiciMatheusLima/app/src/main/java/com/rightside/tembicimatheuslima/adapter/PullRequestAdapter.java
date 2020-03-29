@@ -33,17 +33,14 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pull_request, parent, false);
-        return new MyViewHolder(view);
-
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pull_request, parent, false);
+            return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Pull pull = pullRequests.get(position);
         holder.textViewPullRequestName.setText(pull.getName());
-        Log.d("pull", pullRequests.get(position).getName());
-        Log.d("link", pullRequests.get(position).getRepositoryUrl());
         holder.textViewPullRequestBody.setText(pull.getBody());
         holder.textViewPullRequestBody.setMaxLines(2);
         holder.textViewPullRequestDate.setText(Utility.formatDate(pull.getDate()));

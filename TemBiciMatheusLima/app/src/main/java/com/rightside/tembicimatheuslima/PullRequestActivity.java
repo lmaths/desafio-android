@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.rightside.tembicimatheuslima.adapter.PullRequestAdapter;
 import com.rightside.tembicimatheuslima.adapter.RepositoryAdapter;
+import com.rightside.tembicimatheuslima.util.Utility;
 import com.rightside.tembicimatheuslima.viewmodel.ViewModelRepositorys;
 
 public class PullRequestActivity extends AppCompatActivity {
@@ -24,7 +26,6 @@ public class PullRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pull_request);
-        Toolbar toolbar = findViewById(R.id.maintoolbar);
         RecyclerView recyclerView = findViewById(R.id.recyclerview_pull_requests);
         pullRequestAdapter = new PullRequestAdapter(this);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -36,14 +37,13 @@ public class PullRequestActivity extends AppCompatActivity {
         String ownerName = intent.getStringExtra("ownerName");
         String repoName = intent.getStringExtra("repositoryName");
 
-        Log.d("pull", ownerName + " " + repoName);
-
         viewModelRepositorysPullRequests.getPullRequests(ownerName, repoName).observe(this, pulls -> {
-         if(pulls.isEmpty()) {
-             Toast.makeText(this, "Não possui pull request", Toast.LENGTH_SHORT).show();
-         } else {
-             pullRequestAdapter.updatePullRequests(pulls);
-         }
+            if(pulls.isEmpty()) {
+                Utility.showAlert("Ops", "Esse repositório não possui pull request em aberto" , PullRequestActivity.this);
+            } else  {
+                pullRequestAdapter.updatePullRequests(pulls);
+            }
+
 
         });
 

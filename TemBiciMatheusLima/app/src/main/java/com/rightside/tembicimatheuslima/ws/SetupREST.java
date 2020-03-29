@@ -32,6 +32,7 @@ public class SetupREST {
 
         Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.github.com/")
+
             .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -39,7 +40,6 @@ public class SetupREST {
          apiREST = retrofit.create(ApiREST.class);
 
     }
-
 
     public MutableLiveData<Response> getResponse(int page) {
         SetupREST.apiREST.response(page).enqueue(new Callback<Response>() {
