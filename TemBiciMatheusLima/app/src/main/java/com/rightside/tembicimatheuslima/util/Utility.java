@@ -1,5 +1,6 @@
 package com.rightside.tembicimatheuslima.util;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.ImageView;
@@ -20,8 +21,11 @@ public class Utility {
         return data;
     }
 
-    public static void showAlert(String tittle, String message, Context context) {
+    public static void showAlert(String tittle, String message, Context context, Activity activity) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        alert.setTitle(tittle).setMessage(message).setNeutralButton("Ok", (dialog, which) -> dialog.cancel()).show();
+        alert.setTitle(tittle).setMessage(message).setNeutralButton("Ok", (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            activity.finish();
+        }).show();
     }
 }

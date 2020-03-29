@@ -8,6 +8,11 @@
     tools:context=".PullRequestActivity">
     <include layout="@layout/toolbar" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView_find_pull_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_pull_requests"
         android:layout_width="match_parent"

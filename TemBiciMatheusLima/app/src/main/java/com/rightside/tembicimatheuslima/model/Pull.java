@@ -60,4 +60,8 @@ public class Pull {
     public void setRepositoryUrl(String repositoryUrl) {
         this.repositoryUrl = repositoryUrl;
     }
+
+    public boolean contain(String text) {
+        return getName().toLowerCase().contains(text.toLowerCase());
+    }
 }
