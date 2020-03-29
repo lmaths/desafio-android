@@ -46,7 +46,7 @@ public class PullRequestActivity extends AppCompatActivity {
         String repoName = intent.getStringExtra("repositoryName");
 
         viewModelRepositorysPullRequests.getPullRequests(ownerName, repoName).observe(this, pulls -> {
-            if(pulls == null) {
+            if(pulls.isEmpty()) {
                 Utility.showAlert("Ops", "Esse repositório não possui pull request em aberto" , PullRequestActivity.this, PullRequestActivity.this);
             } else  {
                 this.pullRequests = pulls;

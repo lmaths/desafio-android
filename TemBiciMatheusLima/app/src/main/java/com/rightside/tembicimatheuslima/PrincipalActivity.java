@@ -7,9 +7,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,6 +62,10 @@ public class PrincipalActivity extends AppCompatActivity {
             repositorios = (List<Repository>) savedInstanceState.getSerializable("repositorios");
         } else {
             repositorios = new ArrayList<>();
+
+            if(recyclerView.getAdapter().getItemCount() == 0 ){
+                fetchData(pag);
+            }
         }
 
         searchViewFindRepository.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -76,9 +82,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
-        if(recyclerView.getAdapter().getItemCount() == 0 ){
-            fetchData(pag);
-        }
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,9 +106,6 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
     }
 
